@@ -1,0 +1,4 @@
+# Concept demo Dental Go: non indicizzare.
+# In produzione sostituire con: User-agent: *  Allow: /  e il link alla sitemap.
+User-agent: *
+Disallow: /
