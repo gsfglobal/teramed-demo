@@ -10,12 +10,21 @@ export default function Giulia() {
   return (
     <section className="on-dark relative overflow-hidden pb-24 pt-[calc(var(--header-h)+48px)] md:pb-32 md:pt-[calc(var(--header-h)+80px)]" aria-labelledby="giulia-page-title">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(55% 60% at 75% 35%, #16303f 0%, transparent 70%)' }} />
-      <div className="wrap relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-start">
-        <div>
+      <div className="wrap relative grid gap-10 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-14">
+        <div className="lg:col-start-1 lg:row-start-1">
           <p className="kicker reveal">Assistente virtuale del Centro Teramed</p>
           <h1 id="giulia-page-title" className="display t-hero reveal mt-4 text-[clamp(2.9rem,1.6rem+5vw,6rem)]">Prova Giulia</h1>
           <p className="lead reveal mt-6">Parla con Giulia dal browser, come se chiamassi il centro. Chiedi una prima visita, una seduta di igiene, sposta un appuntamento o segnala un’urgenza.</p>
 
+        </div>
+
+        <div className="reveal lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="rounded-[34px] border border-[var(--line-dark)] bg-[linear-gradient(180deg,#152c3a,#0f202b)] p-6 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)] md:p-10">
+            {site.giulia.agentId ? <GiuliaVoice variant="page" /> : <p className="text-[var(--on-dark-muted)]">La prova vocale non è ancora attiva.</p>}
+          </div>
+        </div>
+
+        <div className="lg:col-start-1 lg:row-start-2">
           <ul className="reveal mt-9 grid gap-4">
             <li className="flex gap-3">
               <MapPin size={19} className="mt-1 shrink-0 text-[var(--sky)]" />
@@ -49,12 +58,6 @@ export default function Giulia() {
               Torna al sito
             </Link>
           </p>
-        </div>
-
-        <div className="reveal order-first lg:order-none lg:sticky lg:top-28">
-          <div className="rounded-[34px] border border-[var(--line-dark)] bg-[linear-gradient(180deg,#152c3a,#0f202b)] p-6 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)] md:p-10">
-            {site.giulia.agentId ? <GiuliaVoice variant="page" /> : <p className="text-[var(--on-dark-muted)]">La prova vocale non è ancora attiva.</p>}
-          </div>
         </div>
       </div>
     </section>
