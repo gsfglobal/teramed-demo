@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Camera, Clock, ExternalLink, MapPin, Phone, Star, Navigation, PhoneCall, ShieldCheck } from 'lucide-react';
 import { site, team, trattamenti, waLink, indirizzoBreve } from '../config/site';
 import { GiuliaButton, PrenotaButton, WhatsAppButton, PhoneLink, WhatsAppIcon } from './Cta';
+import { GiuliaVoice } from './GiuliaVoice';
 import { track } from '../lib/analytics';
 import { prefersReducedMotion } from '../lib/env';
 
@@ -207,59 +208,40 @@ export function BookingBlock() {
 
 /* -------------------------------------------------- Giulia */
 export function GiuliaSection() {
-  const [playing, setPlaying] = useState(false);
-  const bars = [0.35, 0.6, 0.9, 0.5, 1, 0.7, 0.45, 0.85, 0.55, 0.95, 0.4, 0.75, 0.5, 0.65, 0.3];
   return (
     <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
       <div>
         <p className="kicker reveal">Assistente virtuale AI</p>
         <h2 className="display t-1 reveal mt-3">Un nuovo modo di rispondere ai pazienti.</h2>
-        <p className="lead reveal mt-5">Scopri come un’assistente virtuale può supportare la gestione delle richieste telefoniche.</p>
+        <p className="lead reveal mt-5">Scopri come un’assistente virtuale può supportare la gestione delle richieste telefoniche. Giulia è già impostata con orari e servizi del centro: parlale dal browser.</p>
         <ul className="reveal mt-7 grid gap-3 text-[var(--on-dark-muted)]">
           <li className="flex gap-3"><ShieldCheck size={19} className="mt-1 shrink-0 text-[var(--sky)]" /> Si presenta sempre come assistente virtuale.</li>
-          <li className="flex gap-3"><ShieldCheck size={19} className="mt-1 shrink-0 text-[var(--sky)]" /> Raccoglie la richiesta: l’appuntamento lo conferma lo studio.</li>
+          <li className="flex gap-3"><ShieldCheck size={19} className="mt-1 shrink-0 text-[var(--sky)]" /> Fissa la visita in un’agenda di prova o lascia la richiesta alla segreteria.</li>
           <li className="flex gap-3"><ShieldCheck size={19} className="mt-1 shrink-0 text-[var(--sky)]" /> Non dà consigli medici e non fa diagnosi.</li>
         </ul>
         <div className="reveal mt-8 flex flex-wrap gap-3">
           <GiuliaButton size="lg" className="btn-giulia" label="Chiama Giulia e provala" from="sezione-giulia" />
+          <Link to="/giulia" className="btn btn-outline-light btn-lg">
+            Apri la pagina di Giulia
+          </Link>
         </div>
         <p className="reveal mt-5 max-w-[46ch] text-[0.85rem] text-[var(--on-dark-muted)]">
-          Funzione dimostrativa: Giulia è un servizio aggiuntivo proposto da Dental Go e non è ancora attivo per il Centro Teramed.
+          Funzione dimostrativa: Giulia è un servizio aggiuntivo proposto da Dental Go e non è ancora adottato dal Centro Teramed.
         </p>
       </div>
 
-      {/* pannello telefonico: anteprima grafica, nessuna chiamata in corso */}
       <div className="reveal relative mx-auto w-full max-w-[460px]">
         <div aria-hidden="true" className="absolute -inset-10 -z-10 rounded-full" style={{ background: 'radial-gradient(closest-side, rgba(26,167,230,.22), transparent)' }} />
         <div className="rounded-[34px] border border-[var(--line-dark)] bg-[linear-gradient(180deg,#152c3a,#0f202b)] p-6 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)] md:p-8">
-          <div className="flex items-center justify-between text-[0.85rem] text-[var(--on-dark-muted)]">
-            <span>Anteprima</span>
-            <span className="tbc">demo, non collegata</span>
+          <div className="mb-4 flex items-center justify-between text-[0.85rem] text-[var(--on-dark-muted)]">
+            <span>Prova dal vivo</span>
+            <span className="tbc">demo con agenda di prova</span>
           </div>
-          <div className="mt-8 flex flex-col items-center text-center">
-            <div className="grid h-20 w-20 place-items-center rounded-full border border-[rgba(26,167,230,0.45)]" style={{ background: 'radial-gradient(circle, rgba(26,167,230,.25), rgba(26,167,230,.05))' }}>
-              <PhoneCall size={28} className="text-[var(--sky)]" />
-            </div>
-            <p className="display mt-5 text-[1.9rem]">Giulia</p>
-            <p className="text-[0.92rem] text-[var(--on-dark-muted)]">Assistente virtuale del centro</p>
-          </div>
-          <div className={`wave mt-8 flex h-16 items-center justify-center gap-[5px] ${playing ? 'is-playing' : ''}`} aria-hidden="true">
-            {bars.map((h, i) => (
-              <span key={i} style={{ height: `${h * 100}%`, ['--i' as string]: i, opacity: playing ? 1 : 0.45 }} />
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={() => setPlaying((p) => !p)}
-            className="mx-auto mt-6 block rounded-full border border-[var(--line-dark)] px-4 py-2 text-[0.85rem] text-[var(--on-dark-muted)] transition-colors hover:text-white"
-            aria-pressed={playing}
-          >
-            {playing ? 'Ferma l’animazione' : 'Anima le onde sonore'}
-          </button>
-          <div className="mt-7 grid gap-2 rounded-2xl bg-[rgba(255,255,255,0.04)] p-4 text-[0.88rem] text-[var(--on-dark-muted)]">
-            <p className="text-[var(--on-dark)]">Cosa raccoglie per la segreteria</p>
-            <p>Motivo della chiamata, nome, numero di telefono e fascia oraria preferita per essere richiamati.</p>
-          </div>
+          {site.giulia.agentId ? (
+            <GiuliaVoice variant="panel" />
+          ) : (
+            <p className="text-[var(--on-dark-muted)]">La prova vocale si attiva quando Dental Go imposta Giulia per il centro.</p>
+          )}
         </div>
       </div>
     </div>
@@ -333,6 +315,7 @@ export function ContactInfo() {
             </div>
           ))}
         </dl>
+        {site.orari.nota && <p className="muted text-[0.92rem]">{site.orari.nota}</p>}
         {site.orari.daConfermare && <Tbc>orari da confermare ({site.orari.fonte})</Tbc>}
       </div>
     </div>

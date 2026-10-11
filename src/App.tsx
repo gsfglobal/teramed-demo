@@ -10,6 +10,7 @@ const Trattamenti = lazy(() => import('./pages/Trattamenti'));
 const Team = lazy(() => import('./pages/Team'));
 const Implantologia = lazy(() => import('./pages/Implantologia'));
 const Contatti = lazy(() => import('./pages/Contatti'));
+const Giulia = lazy(() => import('./pages/Giulia'));
 
 function NotFound() {
   return (
@@ -34,6 +35,7 @@ function Routed() {
         <Route path="/team" element={<Team />} />
         <Route path="/implantologia" element={<Implantologia />} />
         <Route path="/contatti" element={<Contatti />} />
+        <Route path="/giulia" element={<Giulia />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

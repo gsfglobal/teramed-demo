@@ -12,8 +12,8 @@ Ricerca dell'11 ottobre 2026. Fonti: profilo AlfaDocs del centro, scheda Google 
 - Recensioni: AlfaDocs 4,9 su 245 opinioni; Google 5,0 su 222 recensioni. Mostrate separate, senza citare testi.
 
 ## Discordanti o mancanti
-- **Civico**: Google «3», AlfaDocs e una seconda scheda Google «18». Nel sito: solo «Via Ippolita Panico».
-- **Orari**: scheda principale Google lun chiuso, mar–ven 9–19, sab 9–16; seconda scheda mar–ven 9–20, sab 9–17. Nel sito la prima, con etichetta «da confermare».
+- **Civico**: confermato da Dental Go l'11/10/2026, **Via Ippolita Panico 9** (le fonti online riportavano 3 e 18: conviene correggere Google e AlfaDocs).
+- **Orari**: confermati da Dental Go l'11/10/2026, **martedì–sabato 9:00–18:00 continuato, lunedì chiuso** (domenica chiusa). Le schede Google riportano orari diversi: da aggiornare.
 - **Email** teramed09@libero.it: non verificata, non pubblicata.
 - **Direttore sanitario, P. IVA, iscrizione all'Albo**: obbligatori sul sito, da fornire.
 - **Biografie e aree di attività** dei professionisti: da fornire (nessun titolo inventato).
@@ -28,7 +28,7 @@ Ricerca dell'11 ottobre 2026. Fonti: profilo AlfaDocs del centro, scheda Google 
 ## Integrazioni
 - AlfaDocs: collegamento diretto attivo (nessun sistema di prenotazione parallelo).
 - WhatsApp: wa.me con messaggio precompilato.
-- Giulia: numero di prova non ancora attivo, il pulsante apre una scheda che lo dice chiaramente.
+- Giulia: demo vocale attiva dal browser (agente «Giulia – Centro Teramed (demo)», agenda di prova su Supabase, slug `teramed`). Pagina: `#/giulia`. Numero di telefono di prova non ancora collegato.
 - Analytics: eventi predisposti, nessuno strumento installato.
 - Modulo contatti: dimostrativo, non invia dati.
 

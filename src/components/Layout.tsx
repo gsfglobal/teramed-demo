@@ -38,6 +38,8 @@ function Header() {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
+  // pagine con sfondo scuro in alto: header chiaro finché non si scorre
+  const dark = loc.pathname === '/giulia' && !scrolled && !open;
 
   return (
     <>
@@ -54,9 +56,9 @@ function Header() {
       >
         <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
           <Link to="/" className="block shrink-0" aria-label="Teramed, torna alla home">
-            <Logo className="h-[46px] w-auto md:h-[54px]" />
+            <Logo className="h-[46px] w-auto md:h-[54px]" tone={dark ? 'dark' : 'light'} />
           </Link>
-          <nav aria-label="Principale" className="hidden lg:block">
+          <nav aria-label="Principale" className={`hidden lg:block ${dark ? 'text-[var(--on-dark)]' : ''}`}>
             <ul className="flex items-center gap-7 text-[0.97rem]">
               {NAV.map((n) => (
                 <li key={n.to}>
@@ -69,11 +71,11 @@ function Header() {
           </nav>
           <div className="flex items-center gap-2">
             <div className="hidden sm:block">
-              <PrenotaButton size="sm" from="header" />
+              <PrenotaButton size="sm" from="header" className={dark ? 'btn-light' : 'btn-primary'} />
             </div>
             <button
               type="button"
-              className="grid h-11 w-11 place-items-center rounded-full border border-[var(--line)] lg:hidden"
+              className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${dark ? 'border-[var(--line-dark)] text-[var(--on-dark)]' : 'border-[var(--line)]'}`}
               aria-expanded={open}
               aria-controls="menu-mobile"
               aria-label={open ? 'Chiudi il menu' : 'Apri il menu'}

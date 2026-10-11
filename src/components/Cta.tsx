@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { CalendarCheck, Phone, X, PhoneCall, Info, Copy, Check } from 'lucide-react';
 import { site, waLink } from '../config/site';
+import { GiuliaVoice } from './GiuliaVoice';
 import { track } from '../lib/analytics';
 
 export function WhatsAppIcon({ size = 18, className = '' }: { size?: number; className?: string }) {
@@ -109,7 +110,7 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
         onClose={() => setOpen(false)}
         onClick={(e) => e.target === dialogRef.current && setOpen(false)}
         aria-labelledby="giulia-title"
-        className="m-auto w-[min(560px,calc(100vw-32px))] rounded-[28px] border-0 p-0 bg-transparent backdrop:bg-[rgba(13,27,36,0.55)] backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[92svh] w-[min(560px,calc(100vw-32px))] overflow-y-auto rounded-[28px] border-0 p-0 bg-transparent backdrop:bg-[rgba(13,27,36,0.55)] backdrop:backdrop-blur-sm"
       >
         <div className="on-dark relative overflow-hidden rounded-[28px] p-6 sm:p-9">
           <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full" style={{ background: 'radial-gradient(circle, rgba(26,167,230,.28), transparent 65%)' }} />
@@ -120,39 +121,42 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
           <h2 id="giulia-title" className="display t-2 mt-2 pr-10">Chiama Giulia</h2>
           <p className="mt-3 text-[var(--on-dark-muted)]">Prova l’assistente virtuale AI.</p>
 
-          <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[var(--line-dark)] bg-[var(--abyss-2)] p-4">
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full" style={{ background: 'rgba(26,167,230,.14)' }}>
-              <Phone size={20} className="text-[var(--sky)]" />
+          {site.giulia.agentId && isOpen && (
+            <div className="mt-6 rounded-2xl border border-[var(--line-dark)] bg-[var(--abyss-2)] p-5">
+              <GiuliaVoice variant="dialog" />
             </div>
-            <div className="min-w-0">
-              {configured ? (
-                <>
-                  <p className="text-sm text-[var(--on-dark-muted)]">Numero di prova</p>
-                  <p className="tabnum select-all text-xl font-medium">{site.giulia.display}</p>
-                </>
-              ) : (
-                <>
-                  <p className="font-medium">Numero di prova non ancora attivo</p>
-                  <p className="text-sm text-[var(--on-dark-muted)]">Dental Go lo attiva dopo aver impostato Giulia con le regole del centro. Nessuna chiamata viene avviata da questa pagina.</p>
-                </>
-              )}
-            </div>
-          </div>
+          )}
 
           {configured && (
-            <div className="mt-4 flex flex-wrap gap-3">
-              <a className="btn btn-sky" href={`tel:${site.giulia.telefono}`}>
-                <PhoneCall size={17} /> Chiama il numero di prova
-              </a>
-              <button type="button" className="btn btn-outline-light" onClick={copy}>
-                {copied ? <Check size={17} /> : <Copy size={17} />} {copied ? 'Copiato' : 'Copia il numero'}
-              </button>
+            <div className="mt-4 flex items-center gap-4 rounded-2xl border border-[var(--line-dark)] bg-[var(--abyss-2)] p-4">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full" style={{ background: 'rgba(26,167,230,.14)' }}>
+                <Phone size={20} className="text-[var(--sky)]" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm text-[var(--on-dark-muted)]">Oppure chiama il numero di prova</p>
+                <p className="tabnum select-all text-xl font-medium">{site.giulia.display}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <a className="btn btn-sky btn-sm" href={`tel:${site.giulia.telefono}`}>
+                  <PhoneCall size={16} /> Chiama
+                </a>
+                <button type="button" className="btn btn-outline-light btn-sm" onClick={copy}>
+                  {copied ? <Check size={16} /> : <Copy size={16} />} {copied ? 'Copiato' : 'Copia'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!site.giulia.agentId && !configured && (
+            <div className="mt-6 rounded-2xl border border-[var(--line-dark)] bg-[var(--abyss-2)] p-4">
+              <p className="font-medium">Prova di Giulia non ancora attiva</p>
+              <p className="text-sm text-[var(--on-dark-muted)]">Dental Go la attiva dopo aver impostato Giulia con le regole del centro.</p>
             </div>
           )}
 
           <ul className="mt-6 grid gap-2 text-[0.95rem] text-[var(--on-dark-muted)]">
             <li>Giulia si presenta sempre come assistente virtuale.</li>
-            <li>Raccoglie la richiesta per la segreteria: l’appuntamento lo conferma lo studio.</li>
+            <li>In questa prova fissa la visita in un’agenda dimostrativa, oppure lascia la richiesta alla segreteria.</li>
             <li>Non dà consigli medici e non fa diagnosi.</li>
           </ul>
           <div className="mt-6 flex items-start gap-2 border-t border-[var(--line-dark)] pt-4 text-[0.82rem] text-[var(--on-dark-muted)]">

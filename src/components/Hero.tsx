@@ -109,7 +109,7 @@ export function Hero() {
         <div className="h-after mt-10 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[0.95rem] text-[var(--muted)] lg:absolute lg:flex lg:bottom-8 lg:left-0 lg:right-0 lg:mx-auto lg:max-w-[var(--maxw)] lg:px-[var(--gutter)]">
           <span className="inline-flex items-center gap-2">
             <MapPin size={16} className="text-[var(--sky-deep)]" />
-            {site.indirizzo.via}, {site.indirizzo.citta}
+            {site.indirizzo.via} {site.indirizzo.civico ?? ''}, {site.indirizzo.citta}
           </span>
           <span className="inline-flex items-center gap-2">
             <Phone size={16} className="text-[var(--sky-deep)]" />

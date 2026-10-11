@@ -65,7 +65,7 @@ export const site = {
 
   indirizzo: {
     via: 'Via Ippolita Panico',
-    civico: null as string | null, // DA CONFERMARE: Google indica «3», AlfaDocs e una seconda scheda Google «18».
+    civico: '9' as string | null, // indicato da Dental Go l'11/10/2026 (le fonti online riportavano 3 e 18)
     civiciTrovati: ['3 (Google)', '18 (AlfaDocs)'],
     cap: '83048',
     citta: 'Montella',
@@ -77,18 +77,18 @@ export const site = {
   },
 
   orari: {
-    daConfermare: true,
-    fonte: 'Profilo Google «Teramed Srl», rilevato l’11/10/2026',
-    // Una seconda scheda Google riporta mar–ven 9–20 e sabato 9–17.
+    daConfermare: false,
+    fonte: 'Indicati da Dental Go l’11/10/2026 (orario continuato)',
     giorni: [
       { giorno: 'Lunedì', orario: 'Chiuso' },
-      { giorno: 'Martedì', orario: '9:00 – 19:00' },
-      { giorno: 'Mercoledì', orario: '9:00 – 19:00' },
-      { giorno: 'Giovedì', orario: '9:00 – 19:00' },
-      { giorno: 'Venerdì', orario: '9:00 – 19:00' },
-      { giorno: 'Sabato', orario: '9:00 – 16:00' },
+      { giorno: 'Martedì', orario: '9:00 – 18:00' },
+      { giorno: 'Mercoledì', orario: '9:00 – 18:00' },
+      { giorno: 'Giovedì', orario: '9:00 – 18:00' },
+      { giorno: 'Venerdì', orario: '9:00 – 18:00' },
+      { giorno: 'Sabato', orario: '9:00 – 18:00' },
       { giorno: 'Domenica', orario: 'Chiuso' },
     ],
+    nota: 'Orario continuato',
   },
 
   prenotazione: {
@@ -96,7 +96,11 @@ export const site = {
   },
 
   giulia: {
-    /** Numero di prova di Giulia per Teramed. Finché è null il pulsante mostra uno stato demo. */
+    /** Agente vocale demo di Giulia configurato per Teramed (ElevenLabs, agenda demo su Supabase slug «teramed»). */
+    agentId: 'agent_0401m4p19n5eeqkaq8ch0vq70kfn' as string | null,
+    durataSec: 360,
+    paginaPubblica: 'https://gsfglobal.github.io/teramed-demo/#/giulia',
+    /** Numero di telefono di prova (facoltativo). Se impostato, la scheda mostra anche la chiamata classica. */
     telefono: null as string | null, // es. '+390000000000'
     display: null as string | null,
     infoUrl: 'https://dentalgo.it/giulia-demo/',
@@ -257,4 +261,4 @@ export const waLink = (msg = site.contatti.whatsapp.messaggio) =>
   `https://wa.me/${site.contatti.whatsapp.numero}?text=${encodeURIComponent(msg)}`;
 
 export const indirizzoBreve = () =>
-  `${site.indirizzo.via}${site.indirizzo.civico ? `, ${site.indirizzo.civico}` : ''}, ${site.indirizzo.cap} ${site.indirizzo.citta} (${site.indirizzo.provincia})`;
+  `${site.indirizzo.via}${site.indirizzo.civico ? ` ${site.indirizzo.civico}` : ''}, ${site.indirizzo.cap} ${site.indirizzo.citta} (${site.indirizzo.provincia})`;
